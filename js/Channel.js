@@ -60,8 +60,11 @@ class Channel {
   }
 
   get name() {
-    var liveWhen = this.live ? "Now" : `at ${this.items[0].start.getHours()}:${this.items[0].start.getMinutes()}`;
-    return `${this.data.name.replace(/^[0-9]{2} - /,'')} - Live ${liveWhen}`;
+    var liveWhen = "";
+    if (this.items.length > 0) {
+      liveWhen = this.live ? " - Live Now" : ` - Live at ${this.items[0].start.format("H:mm")}`;
+    }
+    return `${this.data.name.replace(/^[0-9]{2} - /,'')}${liveWhen}`;
   }
 
   get programmeName() {
@@ -73,7 +76,6 @@ class Channel {
   }
 
   get live() {
-    console.log(this.items)
     return this.items[0].start <= new Date(Date.now()) &&
            this.items[0].end > new Date(Date.now());
   }
@@ -86,7 +88,7 @@ class Channel {
           ${rows}
         </itemBanner>`;
     } else {
-      return "";
+      return "<itemBanner></itemBanner>";
     }
   }
 

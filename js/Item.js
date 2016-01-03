@@ -1,21 +1,22 @@
+var moment = require('moment-timezone');
+
 class Item {
   constructor(data) {
     this.data = data;
   }
 
   get start() {
-    console.log(this.data.time, Date.parse(this.data.time));
-    return new Date(Date.parse(this.data.time));
+    return moment.tz(this.data.time, "America/New_York").local();
   }
 
   get end() {
-    return new Date(Date.parse(this.data.end_time));
+    return moment.tz(this.data.end_time, "America/New_York").local();
   }
 
   get row() {
     return `<row>
         <subtitle class="nextName">${this.name}</subtitle>
-        <text class="nextTime">${this.start.getHours()}:${this.start.getMinutes()}</text>
+        <text class="nextTime">${this.start.format("H:mm")}</text>
       </row>`;
   }
 
