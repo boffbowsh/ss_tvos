@@ -25,17 +25,41 @@ var template = `<?xml version="1.0" encoding="UTF-8" ?>
 </document>`;
 
 var view;
+var channels = {};
 
 function render() {
   view = new DOMParser().parseFromString(template, "text/xml");
-  Ajax.fetch("http://cdn.smoothstreams.tv/schedule/feed.json?timezone=UTC", (err, response) => {
-    var data = JSON.parse(response);
+  getFeed(function(data) {
     for (let id in data) {
       var channel = new Channel(data[id]);
+      channels[id] = channel;
       channel.create(view.getElementsByTagName("section").item(0));
     }
+    scheduleUpdate();
   });
+
   return view;
+}
+
+function getFeed(cb) {
+  Ajax.fetch("http://cdn.smoothstreams.tv/schedule/feed.json", (err, response) => {
+    cb(JSON.parse(response));
+  });
+}
+
+function update() {
+  getFeed(function(data) {
+    for (let id in data) {
+      channels[id].update(data[id]);
+    }
+  });
+  scheduleUpdate();
+}
+
+function scheduleUpdate() {
+  // 10 minute boundary
+  var updateAt = Math.floor(Date.now() / 600000) * 600000 + 600000;
+  setTimeout(update, updateAt - Date.now());
 }
 
 module.exports = {render: render};
