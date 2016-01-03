@@ -47,4 +47,16 @@ function ajax(options) {
   return xhr;
 }
 
-module.exports = ajax;
+function fetch(url, cb) {
+  ajax({
+    url: url,
+    dataType: 'json',
+    cache: false,
+    success: cb,
+    error: function(xhr, status, err) {
+      console.error(url, status, err.toString());
+    }.bind(this)
+  });
+}
+
+module.exports = {ajax: ajax, fetch: fetch};
