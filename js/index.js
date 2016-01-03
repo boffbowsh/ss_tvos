@@ -39,6 +39,13 @@ class Item {
     return moment.tz(this.data.end_time, "America/New_York");
   }
 
+  get row() {
+    return `<row>
+        <subtitle class="nextName">${this.name}</subtitle>
+        <text class="nextTime">${this.start.tz(Zone).format("HH:mm")}</text>
+      </row>`;
+  }
+
   get name() {
     return this.data.name;
   }
@@ -74,6 +81,8 @@ class Channel {
     this.setText("ordinal", this.id);
     this.setText("subtitle", this.name);
     this.setText("title", this.programmeName);
+    this.setText("relatedContent", this.relatedContent);
+    }
   }
 
   play() {
@@ -114,6 +123,18 @@ class Channel {
   get live() {
     return this.items[0].start <= moment() &&
            this.items[0].end > moment();
+  }
+
+  get relatedContent() {
+    if (this.items.length > 0) {
+      var rows = this.items.slice(0,8).map(item => item.row).join();
+      return `<itemBanner>
+          <title>Schedule:</title>
+          ${rows}
+        </itemBanner>`;
+    } else {
+      return "";
+    }
   }
 
   setText(nodeType, text) {
