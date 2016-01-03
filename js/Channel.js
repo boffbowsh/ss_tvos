@@ -1,5 +1,6 @@
 var Item = require('./Item');
 var AuthToken = require('./AuthToken');
+var Config = require('./Config');
 
 var parser = new DOMParser();
 
@@ -39,16 +40,18 @@ class Channel {
   play() {
     AuthToken.get(function(authToken) {
       var player = new Player();
+      console.log(this.url + authToken);
       var video = new MediaItem('video', this.url + authToken);
 
       player.playlist = new Playlist();
       player.playlist.push(video);
+      console.log(player, player.playlist, video);
       player.play();
     }.bind(this));
   }
 
   get url() {
-    return `http://d77.smoothstreams.tv:3665/viewss/ch${this.id.length == 1 ? "0" : ""}${this.id}.smil/playlist.m3u8?wmsAuthSign=`;
+    return `http://${Config.host}:${Config.port}/${Config.site}/ch${this.id.length == 1 ? "0" : ""}${this.id}.smil/playlist.m3u8?wmsAuthSign=`;
   }
 
   get items() {
