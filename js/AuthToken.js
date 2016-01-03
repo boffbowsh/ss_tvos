@@ -1,20 +1,18 @@
 var Ajax = require('./Ajax');
 
+var authToken, expiry;
+
 function get(cb) {
-  Ajax.ajax({
-    url: "http://starstreams.tv/",
-    type: "POST",
-    contentType: "application/x-www-form-urlencoded",
-    data: "username=xxx&password=xxx&whmcslink_login=Log%20in",
-    success: function(err, response, xhr) {
-      Ajax.ajax({
-        url: "http://starstreams.tv/players/web_auth/",
-        success: function(err, response, xhr) {
-          cb(response.match(/wmsAuthSign=(.*)"/)[1]);
-        }
-      });
-    }
-  });
+  if (authToken && expiry > Date.now()) {
+    cb(authToken);
+  } else {
+    Ajax.fetch("http://smoothstreams.tv/schedule/admin/dash_new/hash_api.php?username=xxx&password=xxx&site=viewss", function(err, response) {
+      var data = JSON.parse(response);
+      authToken = data.hash;
+      expiry = Date.now() + parseInt(data.valid) * 60 * 1000;
+      cb(authToken);
+    });
+  }
 }
 
 module.exports = {get: get};
