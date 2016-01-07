@@ -4,6 +4,14 @@ const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const babelify = require('babelify');
 const watchify = require('watchify');
+const s3 = require('gulp-s3');
+
+var aws = {
+  key: process.env.AWS_ACCESS_KEY_ID,
+  secret: process.env.AWS_SECRET_ACCESS_KEY,
+  bucket: "ss-tvos",
+  region: "eu-west-1"
+};
 
 var b = watchify(browserify({
   entries: ['./js/index.js'],
@@ -26,3 +34,8 @@ function bundle() {
 gulp.task("default", bundle);
 b.on('update', bundle);
 b.on('log', gutil.log);
+
+gulp.task("publish", ["default"], function() {
+  gulp.src('./dist/**')
+    .pipe(s3(aws));
+});
