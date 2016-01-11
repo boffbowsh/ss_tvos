@@ -50,12 +50,10 @@ class Channel {
         }).show();
       } else {
         var player = new Player();
-        console.log(this.url + authToken);
         var video = new MediaItem('video', this.url + authToken);
 
         player.playlist = new Playlist();
         player.playlist.push(video);
-        console.log(player, player.playlist, video);
         player.play();
       }
     }.bind(this));
