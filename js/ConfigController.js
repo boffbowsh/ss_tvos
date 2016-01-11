@@ -96,31 +96,37 @@ class ServerForm {
   constructor() {
     var template = `<document>
       <alertTemplate>
-         <title>Select your site</title>
-         <button data-host="deu.nl2.smoothstreams.tv">
-            <text>EU NL Evo</text>
-         </button>
-         <button data-host="deu.uk1.smoothstreams.tv">
-            <text>EU UK Lon</text>
-         </button>
-         <button data-host="deu.nl1.smoothstreams.tv">
-            <text>EU NL i3d</text>
-         </button>
-         <button data-host="dnae2.smoothstreams.tv">
-            <text>US East 2 VA</text>
-         </button>
-         <button data-host="dnae1.smoothstreams.tv">
-            <text>US East 1 NJ</text>
-         </button>
-         <button data-host="dnaw1.smoothstreams.tv">
-            <text>US West LA</text>
-         </button>
-         <button data-host="dnae3.smoothstreams.tv">
-            <text>CA East</text>
-         </button>
-         <button data-host="dsg.smoothstreams.tv">
-            <text>Asia SG</text>
-         </button>
+        <title>Select your site</title>
+        <button data-host="deu.nl2.smoothstreams.tv">
+          <text>EU NL Evo</text>
+        </button>
+        <button data-host="deu.uk1.smoothstreams.tv">
+          <text>EU UK Lon</text>
+        </button>
+        <button data-host="deu.nl1.smoothstreams.tv">
+          <text>EU NL i3d</text>
+        </button>
+        <button data-host="deu.de1.smoothstreams.tv">
+           <text>EU Deutschland</text>
+        </button>
+        <button data-host="dnae2.smoothstreams.tv">
+          <text>US East 2 VA</text>
+        </button>
+        <button data-host="dnae1.smoothstreams.tv">
+          <text>US East 1 NJ</text>
+        </button>
+        <button data-host="dnaw1.smoothstreams.tv">
+          <text>US West LA</text>
+        </button>
+        <button data-host="dnae3.smoothstreams.tv">
+          <text>CA East Toronto</text>
+        </button>
+        <button data-host="dnae4.smoothstreams.tv">
+          <text>CA East Montréal</text>
+        </button>
+        <button data-host="dsg.smoothstreams.tv">
+          <text>Asia SG</text>
+        </button>
       </alertTemplate>
     </document>`;
 
