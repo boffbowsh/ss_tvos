@@ -8,7 +8,8 @@
 - A USB Type-C cable to connect your computer to the Apple TV
 
 To install, follow [this guide](http://www.redmondpie.com/how-to-sideload-apps-on-apple-tv-4-tutorial/)
-using this repository as the source.
+using this repository as the source. When you load the project in Xcode for the first time, select
+the root "SmoothStreams" project and change the "Bundle Identifier" to something unique to you.
 
 There is very little chance that this app will ever appear in the Apple TV App Store due to the
 nature of the SmoothStreams network, so you will have to sideload the app using this method.
