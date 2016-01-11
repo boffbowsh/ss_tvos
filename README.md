@@ -17,7 +17,8 @@ nature of the SmoothStreams network, so you will have to sideload the app using 
 ## Usage
 
 When you open load the app for the first time, you will be asked to enter your username or email,
-then your password. You will then need to select your site and nearest server.
+then your password. You will then need to select your site and nearest server. To reconfigure the
+server or your login credentials, press the Play/Pause button.
 
 ## Updates
 
@@ -26,7 +27,6 @@ release notes.
 
 ## Known Issues / Planned features
 
-- Can't change credentials or server without reinstalling app
 - Ugly / plain app icon (Pull Requests welcome!)
 - Unicode issue with some characters
 - Easily watch other versions of programmes on other channels (720p, HQ/LQ, UK, TSN etc.)

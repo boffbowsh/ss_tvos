@@ -1,5 +1,6 @@
 var Channel = require('./Channel');
 var Ajax = require('./Ajax');
+var ConfigController = require('./ConfigController');
 
 var template = `<?xml version="1.0" encoding="UTF-8" ?>
 <document>
@@ -36,6 +37,14 @@ function render() {
       channel.create(view.getElementsByTagName("section").item(0));
     }
     scheduleUpdate();
+  });
+
+  view.addEventListener("play", function(evt) {
+    evt.preventDefault();
+    var configController = new ConfigController();
+    configController.show(() => {
+      navigationDocument.popToRootDocument();
+    });
   });
 
   return view;
