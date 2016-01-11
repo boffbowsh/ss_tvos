@@ -1,6 +1,6 @@
 {
   "name": "ss_tvos",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "== README",
   "main": "index.js",
   "dependencies": {
@@ -23,5 +23,8 @@
     "url": "https://github.com/boffbowsh/ss_tvos/issues"
   },
   "homepage": "https://github.com/boffbowsh/ss_tvos#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.8.0"
+  }
 }
