@@ -1,6 +1,8 @@
 var Item = require('./Item');
 var AuthToken = require('./AuthToken');
 var Config = require('./Config');
+var ConfigController = require('./ConfigController');
+var ErrorDialog = require('./ErrorDialog');
 
 var parser = new DOMParser();
 
@@ -38,15 +40,24 @@ class Channel {
   }
 
   play() {
-    AuthToken.get(function(authToken) {
-      var player = new Player();
-      console.log(this.url + authToken);
-      var video = new MediaItem('video', this.url + authToken);
+    AuthToken.get(function(error, authToken) {
+      if (error) {
+        new ErrorDialog(error, function() {
+          var configController = new ConfigController();
+          configController.show(() => {
+            navigationDocument.popToRootDocument();
+          });
+        }).show();
+      } else {
+        var player = new Player();
+        console.log(this.url + authToken);
+        var video = new MediaItem('video', this.url + authToken);
 
-      player.playlist = new Playlist();
-      player.playlist.push(video);
-      console.log(player, player.playlist, video);
-      player.play();
+        player.playlist = new Playlist();
+        player.playlist.push(video);
+        console.log(player, player.playlist, video);
+        player.play();
+      }
     }.bind(this));
   }
 
