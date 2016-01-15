@@ -80,7 +80,7 @@ class Channel {
   }
 
   get programmeName() {
-    if (this.items.length == 0) {
+    if (this.items.length === 0) {
       return "No programmes scheduled";
     } else {
       return this.items[0].name;

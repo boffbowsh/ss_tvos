@@ -5,6 +5,7 @@ const source = require('vinyl-source-stream');
 const babelify = require('babelify');
 const watchify = require('watchify');
 const s3 = require('gulp-s3');
+const jshint = require('gulp-jshint');
 
 var aws = {
   key: process.env.AWS_ACCESS_KEY_ID,
@@ -38,4 +39,10 @@ b.on('log', gutil.log);
 gulp.task("publish", ["default"], function() {
   gulp.src('./dist/**')
     .pipe(s3(aws));
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });

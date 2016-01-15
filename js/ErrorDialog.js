@@ -1,6 +1,6 @@
 class ErrorDialog {
   constructor(message, cb) {
-    var parser = new DOMParser()
+    var parser = new DOMParser();
     this.document = parser.parseFromString(`<document>
       <alertTemplate>
         <title>Authentication error:</title>
@@ -12,7 +12,7 @@ class ErrorDialog {
     </document>`, "text/xml");
     this.document.addEventListener("select", function() {
       navigationDocument.dismissModal();
-      this.document = null
+      this.document = null;
       cb();
     });
   }
