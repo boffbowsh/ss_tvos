@@ -7,7 +7,11 @@ function get(cb) {
   if (authToken && expiry > Date.now()) {
     cb(null, authToken);
   } else {
-    Ajax.fetch(`http://smoothstreams.tv/schedule/admin/dash_new/hash_api.php?username=${Config.username}&password=${Config.password}&site=${Config.site}`, function(err, response) {
+    var username = encodeURIComponent(Config.username),
+        password = encodeURIComponent(Config.password);
+
+    var url = `http://smoothstreams.tv/schedule/admin/dash_new/hash_api.php?username=${username}&password=${password}&site=${Config.site}`;
+    Ajax.fetch(url, function(err, response) {
       var data = JSON.parse(response);
       if (data.error) {
         authToken = null;
