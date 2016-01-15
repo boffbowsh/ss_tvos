@@ -8,9 +8,6 @@ function ajax(options) {
     console.log("options.success was missing for this request");
   };
   var contentType = options.contentType || 'application/json';
-  var error = options.error || function(err, data) {
-    console.log("options.error was missing for this request");
-  };
 
   if (!url) {
     throw 'loadURL requires a url argument';
@@ -24,7 +21,7 @@ function ajax(options) {
       if (xhr.status === 200) {
         success(null, xhr.responseText, xhr);
       } else {
-        success(new Error("Error [" + xhr.status + "] making http request: " + url));
+        success("Error [" + xhr.status + "] making http request: " + url);
       }
     }
   };
@@ -52,10 +49,7 @@ function fetch(url, cb) {
     url: url,
     dataType: 'json',
     cache: false,
-    success: cb,
-    error: function(xhr, status, err) {
-      console.error(url, status, err.toString());
-    }.bind(this)
+    success: cb
   });
 }
 

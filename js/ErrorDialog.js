@@ -1,10 +1,13 @@
+var escape = require('escape-html');
+
 class ErrorDialog {
   constructor(message, cb) {
+    console.log("Error:", message);
     var parser = new DOMParser();
     this.document = parser.parseFromString(`<document>
       <alertTemplate>
         <title>Authentication error:</title>
-        <description>${message}</description>
+        <description>${escape(message)}</description>
         <button>
           <text>OK</text>
         </button>

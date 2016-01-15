@@ -12,6 +12,12 @@ function get(cb) {
 
     var url = `http://smoothstreams.tv/schedule/admin/dash_new/hash_api.php?username=${username}&password=${password}&site=${Config.site}`;
     Ajax.fetch(url, function(err, response) {
+      if (err) {
+        authToken = null;
+        expiry = null;
+        cb(err);
+        return;
+      }
       var data = JSON.parse(response);
       if (data.error) {
         authToken = null;
