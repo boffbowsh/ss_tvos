@@ -11,6 +11,7 @@
     "gulp": "^3.9.0",
     "gulp-s3": "^0.3.0",
     "moment-timezone": "^0.5.0",
+    "special-entities": "^1.0.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.1"
   },

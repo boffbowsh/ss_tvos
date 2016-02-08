@@ -1,3 +1,5 @@
+var Entities = require('special-entities');
+
 var Item = require('./Item');
 var AuthToken = require('./AuthToken');
 var Config = require('./Config');
@@ -105,6 +107,7 @@ class Channel {
   }
 
   setText(nodeType, text) {
+    text = Entities.normalizeXML(text, "numeric");
     this.node.getElementsByTagName(nodeType).item(0).innerHTML = text;
   }
 }
