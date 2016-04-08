@@ -60,19 +60,19 @@ class SiteForm {
     var template = `<document>
       <alertTemplate>
          <title>Select your site</title>
-         <button data-service-name="viewms" data-port="3655">
+         <button data-service-name="viewms" data-port="9100">
             <text>MyStreams &amp; uSport</text>
          </button>
-         <button data-service-name="view247" data-port="3625">
+         <button data-service-name="view247" data-port="9100">
             <text>Live 247</text>
          </button>
-         <button data-service-name="viewss" data-port="3665">
+         <button data-service-name="viewss" data-port="9100">
             <text>StarStreams</text>
          </button>
-         <button data-service-name="viewmma" data-port="3645">
+         <button data-service-name="viewmma" data-port="9100">
             <text>MMA-TV / MyShout</text>
          </button>
-         <button data-service-name="viewstvn" data-port="3615">
+         <button data-service-name="viewstvn" data-port="9100">
             <text>StreamTVnow</text>
          </button>
       </alertTemplate>
