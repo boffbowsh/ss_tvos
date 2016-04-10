@@ -23,6 +23,10 @@ class Item {
   get name() {
     return this.data.name;
   }
+
+  get quality() {
+    return this.data.quality;
+  }
 }
 
 module.exports = Item;

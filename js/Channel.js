@@ -20,6 +20,7 @@ class Channel {
       <ordinal minLength="3" class="ordinalLayout"></ordinal>
       <subtitle></subtitle>
       <title></title>
+      <decorationLabel></decorationLabel>
       <relatedContent>
       </relatedContent>
     </listItemLockup>`;
@@ -39,6 +40,7 @@ class Channel {
     this.setText("subtitle", this.name);
     this.setText("title", this.programmeName);
     this.setText("relatedContent", this.relatedContent);
+    this.setText("decorationLabel", this.quality);
   }
 
   play() {
@@ -106,7 +108,18 @@ class Channel {
     }
   }
 
+  get quality() {
+    if (this.items.length === 0) {
+      return "";
+    } else {
+      return this.items[0].quality;
+    }
+  }
+
   setText(nodeType, text) {
+    if (text.length === 0) {
+      return;
+    }
     text = Entities.normalizeXML(text, "numeric");
     this.node.getElementsByTagName(nodeType).item(0).innerHTML = text;
   }
