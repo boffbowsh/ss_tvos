@@ -62,7 +62,7 @@ class Channel {
   }
 
   get url() {
-    return `http://${Config.host}:${Config.port}/${Config.site}/ch${this.id.length == 1 ? "0" : ""}${this.id}.smil/playlist.m3u8?wmsAuthSign=`;
+    return `http://${Config.host}:${Config.port}/${Config.site}/ch${this.id.length == 1 ? "0" : ""}${this.id}q1.stream/playlist.m3u8?wmsAuthSign=`;
   }
 
   get items() {
