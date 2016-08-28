@@ -80,6 +80,7 @@ class Item {
     this.node.addEventListener("select", this.channel.play.bind(this.channel));
     context.appendChild(this.node);
     this.update(this.data);
+    this.addAlternativeVersions();
   }
 
   update(data) {
@@ -88,6 +89,9 @@ class Item {
     this.setText("subtitle", this.subtitle);
     this.setText("title", this.name);
     this.setText("decorationLabel", this.quality);
+  }
+
+  addAlternativeVersions() {
     for (let i in this.children) {
       var child = this.children[i];
       this.addAlternativeVersion(child);

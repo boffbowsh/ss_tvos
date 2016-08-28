@@ -37,8 +37,7 @@ function render() {
     for (let id in data) {
       var channel = new Channel(data[id]);
       for (let i in channel.items) {
-        var item = channel.items[i]
-        itemHash[item.id] = item;
+        itemHash[channel.items[i].id] = channel.items[i];
       }
     }
 
@@ -47,9 +46,8 @@ function render() {
     items = items.sort((a, b) => a.cmp(b));
 
     for (let i in items) {
-      var item = items[i];
-      if (item.parentId > 0)
-        itemHash[item.parentId].children.push(item);
+      if (items[i].parentId > 0)
+        itemHash[items[i].parentId].children.push(items[i]);
     }
 
     for (let i in items) {
@@ -75,7 +73,7 @@ function render() {
 
 function getFeed(cb) {
   Ajax.fetch("http://cdn.smoothstreams.tv/schedule/feed.json", (err, response) => {
-    if (err || response == '') {
+    if (err || response === '') {
       new ErrorDialog("Error receiving schedule data from SmoothStreams", update).show();
     } else {
       cb(JSON.parse(response));
