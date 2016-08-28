@@ -28,15 +28,37 @@ var template = `<?xml version="1.0" encoding="UTF-8" ?>
 
 var view;
 var channels = {};
+var itemHash = {};
+var items = [];
 
 function render() {
   view = new DOMParser().parseFromString(template, "text/xml");
   getFeed(function(data) {
     for (let id in data) {
       var channel = new Channel(data[id]);
-      channels[id] = channel;
-      channel.create(view.getElementsByTagName("section").item(0));
+      for (let i in channel.items) {
+        var item = channel.items[i]
+        itemHash[item.id] = item;
+      }
     }
+
+    items = Object.keys(itemHash).map(key => itemHash[key]);
+
+    items = items.sort((a, b) => a.cmp(b));
+
+    for (let i in items) {
+      var item = items[i];
+      if (item.parentId > 0)
+        itemHash[item.parentId].children.push(item);
+    }
+
+    for (let i in items) {
+      var item = items[i];
+      if (item.past || item.parentId > 0)
+        continue;
+      item.create(view.getElementsByTagName("section").item(0));
+    }
+
     scheduleUpdate();
   });
 

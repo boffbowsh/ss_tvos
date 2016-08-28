@@ -69,18 +69,14 @@ class Channel {
 
   get items() {
     if (this.data.items) {
-      return this.data.items.map(item => new Item(item));
+      return this.data.items.map(item => new Item(item, this));
     } else {
       return [];
     }
   }
 
   get name() {
-    var liveWhen = "";
-    if (this.items.length > 0) {
-      liveWhen = this.live ? " - Live Now" : ` - Live at ${this.items[0].start.format("H:mm")}`;
-    }
-    return `${this.data.name.replace(/^[0-9]{2} - /,'')}${liveWhen}`;
+    return this.data.name.replace(/ -.$/,'');
   }
 
   get programmeName() {
