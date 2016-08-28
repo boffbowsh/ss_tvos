@@ -1,6 +1,7 @@
 var Channel = require('./Channel');
 var Ajax = require('./Ajax');
 var ConfigController = require('./ConfigController');
+var ErrorDialog = require('./ErrorDialog');
 
 var template = `<?xml version="1.0" encoding="UTF-8" ?>
 <document>
@@ -52,7 +53,11 @@ function render() {
 
 function getFeed(cb) {
   Ajax.fetch("http://cdn.smoothstreams.tv/schedule/feed.json", (err, response) => {
-    cb(JSON.parse(response));
+    if (err || response == '') {
+      new ErrorDialog("Error receiving schedule data from SmoothStreams", update).show();
+    } else {
+      cb(JSON.parse(response));
+    }
   });
 }
 
