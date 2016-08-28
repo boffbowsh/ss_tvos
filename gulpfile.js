@@ -31,7 +31,7 @@ function bundle() {
     .pipe(gulp.dest('dist'));
 }
 
-gulp.task("default", ["lint"], bundle);
+gulp.task("default", bundle);
 
 gulp.task("add_watchify", function() {
   watchify(b);
