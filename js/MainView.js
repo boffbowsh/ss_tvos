@@ -84,7 +84,12 @@ function getFeed(cb) {
 function update() {
   getFeed(function(data) {
     for (let id in data) {
-      channels[id].update(data[id]);
+      for (let i in data[id].items) {
+        var item = data[id].items[i];
+        var itemId = parseInt(item.id, 10);
+        if (itemHash[itemId])
+          itemHash[itemId].update(item);
+      }
     }
   });
   scheduleUpdate();
