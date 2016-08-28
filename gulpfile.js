@@ -14,27 +14,33 @@ var aws = {
   region: "eu-west-1"
 };
 
-var b = watchify(browserify({
+var b = browserify({
   entries: ['./js/index.js'],
   plugins: [watchify],
-  insertGlobalVars: {
-  }
-}));
+  insertGlobalVars: {}
+});
 
 b.transform("babelify", {presets: ["es2015"]});
 
 function bundle() {
   return b.bundle()
-  .on('error', (err) => {
-      console.error(err.message);
-  })
-  .pipe(source("index.js"))
-  .pipe(gulp.dest('dist'));
+    .on('error', (err) => {
+        console.error(err.message);
+    })
+    .pipe(source("index.js"))
+    .pipe(gulp.dest('dist'));
 }
 
-gulp.task("default", bundle);
-b.on('update', bundle);
-b.on('log', gutil.log);
+gulp.task("default", ["lint"], bundle);
+
+gulp.task("add_watchify", function() {
+  watchify(b);
+
+  b.on('update', bundle);
+  b.on('log', gutil.log);
+});
+
+gulp.task("watch", ["add_watchify", "default"], bundle);
 
 gulp.task("publish", ["default"], function() {
   gulp.src('./dist/**')
@@ -42,7 +48,8 @@ gulp.task("publish", ["default"], function() {
 });
 
 gulp.task('lint', function() {
-  return gulp.src('./js/*.js')
+  return gulp.src(['./js/*.js', "gulpfile.js"])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
 });
