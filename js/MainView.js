@@ -87,7 +87,7 @@ function update() {
       for (let i in data[id].items) {
         var item = data[id].items[i];
         var itemId = parseInt(item.id, 10);
-        if (itemHash[itemId])
+        if (itemHash[itemId] && itemHash[itemId].node)
           itemHash[itemId].update(item);
       }
     }

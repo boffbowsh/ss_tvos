@@ -85,6 +85,11 @@ class Item {
 
   update(data) {
     this.data = data;
+    if (this.node && this.past) {
+      this.node.parentNode.removeChild(this.node);
+      this.node = null;
+      return;
+    }
     this.setText("ordinal", this.ordinal);
     this.setText("subtitle", this.subtitle);
     this.setText("title", this.name);
