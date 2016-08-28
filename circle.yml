@@ -1,6 +1,9 @@
 machine:
   node:
     version: 6.4.0
-test:
-  post:
-    - gulp publish
+deployment:
+  master:
+    branch: master
+    owner: boffbowsh
+    commands:
+      - gulp publish
