@@ -1,3 +1,4 @@
+var Entities = require('html-entities').AllHtmlEntities;
 var moment = require('moment-timezone');
 
 class Item {
@@ -15,7 +16,7 @@ class Item {
 
   get row() {
     return `<row>
-        <subtitle class="nextName">${this.name}</subtitle>
+        <subtitle class="nextName">${Entities.encodeNonUTF(this.name).replace(/&Tab;/,' ')}</subtitle>
         <text class="nextTime">${this.start.format("H:mm")}</text>
       </row>`;
   }
