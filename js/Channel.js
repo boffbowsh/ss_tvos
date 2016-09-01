@@ -1,4 +1,4 @@
-var Entities = require('special-entities');
+var Entities = require('html-entities').AllHtmlEntities;
 
 var Item = require('./Item');
 var AuthToken = require('./AuthToken');
@@ -120,7 +120,8 @@ class Channel {
     if (text.length === 0) {
       return;
     }
-    text = Entities.normalizeXML(text, "numeric");
+    text = Entities.encodeNonUTF(text);
+    text = text.replace(/&Tab;/, ' ');
     this.node.getElementsByTagName(nodeType).item(0).innerHTML = text;
   }
 }

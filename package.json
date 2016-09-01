@@ -12,6 +12,7 @@
     "gulp-jshint": "^2.0.1",
     "gulp-s3": "^0.3.0",
     "gulp-util": "^3.0.7",
+    "html-entities": "^1.2.0",
     "jshint": "^2.9.3",
     "moment-timezone": "^0.5.0",
     "special-entities": "^1.0.2",

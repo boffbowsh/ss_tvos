@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
 
     var window: UIWindow?
     var appController: TVApplicationController?
-    static let TVBootURL = "https://s3-eu-west-1.amazonaws.com/ss-tvos/index.js"
+    static let TVBootURL = "https://s3-eu-west-1.amazonaws.com/ss-tvos/index_channels.js"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
