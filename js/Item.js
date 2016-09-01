@@ -123,6 +123,7 @@ class Item {
       return;
     }
     text = Entities.normalizeXML(text, "numeric");
+    text = text.replace(/ & /, ' &amp; ');
     this.node.getElementsByTagName(nodeType).item(0).innerHTML = text;
   }
 
