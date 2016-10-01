@@ -14,16 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
 
     var window: UIWindow?
     var appController: TVApplicationController?
+    //    static let TVBootURL = "http://127.0.0.1:8000/dist/index.js"
     static let TVBootURL = "https://s3-eu-west-1.amazonaws.com/ss-tvos/index.js"
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
         
         // 1
         let appControllerContext = TVApplicationControllerContext()
         
         // 2
-        guard let javaScriptURL = NSURL(string: AppDelegate.TVBootURL) else {
+        guard let javaScriptURL = URL(string: AppDelegate.TVBootURL) else {
             fatalError("unable to create NSURL")
         }
         appControllerContext.javaScriptApplicationURL = javaScriptURL

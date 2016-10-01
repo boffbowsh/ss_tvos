@@ -46,7 +46,7 @@ function render() {
     items = items.sort((a, b) => a.cmp(b));
 
     for (let i in items) {
-      if (items[i].parentId > 0)
+      if (items[i].parentId > 0 && items[i].parentId in itemHash)
         itemHash[items[i].parentId].children.push(items[i]);
     }
 
